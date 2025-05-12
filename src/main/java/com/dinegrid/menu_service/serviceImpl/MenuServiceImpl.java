@@ -9,6 +9,9 @@ import com.dinegrid.menu_service.repository.MenuRepository;
 import com.dinegrid.menu_service.service.MenuService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,6 +27,7 @@ public class MenuServiceImpl implements MenuService {
     private final MenuItemMapper menuItemMapper;
 
     @Override
+    @CachePut(value = "menuItems", key = "#result.id")
     public MenuItemResponse addMenuItem(MenuItemRequest menuItem) {
         MenuEntity menuItemEntity = menuItemMapper.toEntity(menuItem);
         MenuEntity savedItem = menuRepository.save(menuItemEntity);
@@ -38,6 +42,7 @@ public class MenuServiceImpl implements MenuService {
                 .collect(Collectors.toList());
     }
 
+    @Cacheable(value = "menuItems", key = "#id")
     @Override
     public MenuItemResponse getMenuItemById(Long id) {
         MenuEntity menuItem = menuRepository.findById(id)
@@ -45,7 +50,9 @@ public class MenuServiceImpl implements MenuService {
         return menuItemMapper.toResponse(menuItem);
     }
 
+
     @Override
+    @CacheEvict(value = "menuItems", key = "#id")
     public MenuItemResponse updateMenuItem(Long id, MenuItemRequest request) {
         log.info("Updating menu item with id: {}", id);
         MenuEntity existingItem = menuRepository.findById(id)
@@ -59,6 +66,7 @@ public class MenuServiceImpl implements MenuService {
     }
 
     @Override
+    @CacheEvict(value = "menuItems", key = "#id")
     public void deleteMenuItem(Long id) {
         log.info("Deleting menu item with id: {}", id);
         if (!menuRepository.existsById(id)) {
