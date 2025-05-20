@@ -14,4 +14,5 @@ public class MenuItemRequest {
     @NotNull(message = "Price cannot be null")
     private Double price;
     private Boolean available;
+    private Integer quantity;
 }

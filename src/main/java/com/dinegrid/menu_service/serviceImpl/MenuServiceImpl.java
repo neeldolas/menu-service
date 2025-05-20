@@ -3,6 +3,7 @@ package com.dinegrid.menu_service.serviceImpl;
 import com.dinegrid.menu_service.dto.MenuItemRequest;
 import com.dinegrid.menu_service.dto.MenuItemResponse;
 import com.dinegrid.menu_service.entity.MenuEntity;
+import com.dinegrid.menu_service.exception.MenuItemNotFoundException;
 import com.dinegrid.menu_service.exception.ResourceNotFoundException;
 import com.dinegrid.menu_service.mapper.MenuItemMapper;
 import com.dinegrid.menu_service.repository.MenuRepository;
@@ -42,12 +43,12 @@ public class MenuServiceImpl implements MenuService {
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "menuItems", key = "#id")
+//    @Cacheable(value = "menuItems", key = "#id")
     @Override
     public MenuItemResponse getMenuItemById(Long id) {
-        MenuEntity menuItem = menuRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Menu item not found"));
-        return menuItemMapper.toResponse(menuItem);
+        return menuRepository.findById(id)
+                .map(menuItemMapper::toResponse)
+                .orElseThrow(() -> new MenuItemNotFoundException(id));
     }
 
 

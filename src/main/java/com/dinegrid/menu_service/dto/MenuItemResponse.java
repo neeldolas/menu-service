@@ -9,4 +9,5 @@ public class MenuItemResponse {
     private String description;
     private Double price;
     private Boolean available;
+    private long quantity;
 }

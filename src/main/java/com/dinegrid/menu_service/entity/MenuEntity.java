@@ -14,7 +14,14 @@ public class MenuEntity {
 
     @Column(nullable = false)
     private String name;
+
     private String description;
+
     private Double price;
+
     private Boolean available;
+
+    @Column(nullable = false)
+    private Integer quantity;
+
 }
