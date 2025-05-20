@@ -1,4 +1,5 @@
 🍽️ DineGrid Menu Service
+
 The Menu Service is part of the DineGrid Food Ordering Microservices platform. It manages food menu items — handling CRUD operations, exposing APIs for other services like Order Service, caching frequently accessed items, and reacting to async events via Kafka.
 
 📦 Tech Stack
