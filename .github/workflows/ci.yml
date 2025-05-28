@@ -26,7 +26,8 @@ jobs:
         run: |
           docker build -t neeldolas/menu-service:latest .
 
-        Optional: push to DockerHub
+      # push to DockerHub
+
       - name: 🔑 Login to Docker Hub
         uses: docker/login-action@v3
         with:
