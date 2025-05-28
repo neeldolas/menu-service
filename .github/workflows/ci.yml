@@ -36,4 +36,4 @@ jobs:
 
       - name: 📤 Push Docker image to DockerHub
         run: |
-          docker push neeldolas/menu-service:latest
+          docker push neelddocker/menu-service:latest
