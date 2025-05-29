@@ -26,19 +26,19 @@ public class OrderEventListner {
 //        // You can deserialise JSON if needed later
 //    }
 
-    @KafkaListener(topics = "order-events", groupId = "menu-service-group")
-    public void consumeOrderEvent(OrderPlacedEvent event) {
-        log.info("Consumed order event: {}", event);
-
-        Optional<MenuEntity> menuItemOpt = menuRepository.findById(event.getMenuItemId());
-        if (menuItemOpt.isPresent()) {
-            MenuEntity menuItem = menuItemOpt.get();
-            int newQuantity = menuItem.getQuantity() - event.getQuantity();
-            menuItem.setQuantity(newQuantity >= 0 ? newQuantity : 0);
-            menuRepository.save(menuItem);
-            log.info("Updated quantity for menu item {} to {}", event.getMenuItemId(), newQuantity);
-        } else {
-            log.warn("Menu item with id {} not found!", event.getMenuItemId());
-        }
-    }
+//    @KafkaListener(topics = "order-events", groupId = "menu-service-group")
+//    public void consumeOrderEvent(OrderPlacedEvent event) {
+//        log.info("Consumed order event: {}", event);
+//
+//        Optional<MenuEntity> menuItemOpt = menuRepository.findById(event.getMenuItemId());
+//        if (menuItemOpt.isPresent()) {
+//            MenuEntity menuItem = menuItemOpt.get();
+//            int newQuantity = menuItem.getQuantity() - event.getQuantity();
+//            menuItem.setQuantity(newQuantity >= 0 ? newQuantity : 0);
+//            menuRepository.save(menuItem);
+//            log.info("Updated quantity for menu item {} to {}", event.getMenuItemId(), newQuantity);
+//        } else {
+//            log.warn("Menu item with id {} not found!", event.getMenuItemId());
+//        }
+//    }
 }
