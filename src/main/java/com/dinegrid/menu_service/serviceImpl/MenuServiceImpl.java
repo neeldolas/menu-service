@@ -43,7 +43,7 @@ public class MenuServiceImpl implements MenuService {
                 .collect(Collectors.toList());
     }
 
-//    @Cacheable(value = "menuItems", key = "#id")
+    @Cacheable(value = "menuItems", key = "#id")
     @Override
     public MenuItemResponse getMenuItemById(Long id) {
         return menuRepository.findById(id)
