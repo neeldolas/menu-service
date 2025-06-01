@@ -22,7 +22,16 @@ jobs:
           script: |
             cd dinegrid-infra-1
             git pull origin main
+
+            # Clean Maven build
             ./mvnw clean install -DskipTests
+
+            # Bring containers down cleanly but KEEP volumes intact
             docker-compose down
+
+            # Rebuild and restart
             docker-compose up --build -d
+
+            # Optional: remove dangling images to clean up disk
             docker image prune -f
+          
