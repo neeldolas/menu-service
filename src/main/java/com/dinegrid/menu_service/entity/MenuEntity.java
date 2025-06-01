@@ -24,4 +24,5 @@ public class MenuEntity {
     @Column(nullable = false)
     private Integer quantity;
 
+    
 }
