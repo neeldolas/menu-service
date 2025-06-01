@@ -21,7 +21,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             # Go to infra directory
-            cd dinegrid-infra
+            cd dinegrid-infra-1
 
             # Pull latest images from DockerHub
             docker-compose pull
