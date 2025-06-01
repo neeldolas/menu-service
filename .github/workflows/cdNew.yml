@@ -1,4 +1,4 @@
-name: 🚀 Menu Service CD (DockerHub Pull & Deploy)
+name: Menu Service CD (DockerHub Pull & Deploy)
 
 on:
   push:
